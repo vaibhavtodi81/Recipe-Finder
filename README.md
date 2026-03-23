@@ -90,3 +90,14 @@ Optimized for:
 ---
 
 ## 📂 Project Structure
+
+recipe-finder/
+│
+├── index.html
+├── styles/
+│ └── style.css
+│
+├── scripts/
+│ └── app.js
+│
+└── README.md
