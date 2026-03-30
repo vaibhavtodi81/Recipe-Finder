@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipe Finder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles/style.css"/>
+</head>
+<body>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="hero" id="heroSection">
+    <div class="hero-badge">🍴 Powered by TheMealDB API</div>
+
+    <h1>
+      Discover<br/>
+      <span class="gold">Delicious</span><br/>
+      <span class="dim">Recipes</span>
+    </h1>
+
+    <p class="hero-sub">
+      Search thousands of meals, filter by category or country,
+      save your favourites and explore step-by-step cooking instructions.
+    </p>
+
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Try 'Pasta', 'Sushi', 'Biryani'…"/>
+      <button class="search-btn" onclick="handleSearch()">Search →</button>
+    </div>
+
+    <div class="filter-groups">
+      <div class="filter-block">
+        <p class="filter-label">Browse by category</p>
+        <div class="categories">
+          <button class="pill category-pill active" onclick="selectCategory('Chicken', this)">🍗 Chicken</button>
+          <button class="pill category-pill" onclick="selectCategory('Beef', this)">🥩 Beef</button>
+          <button class="pill category-pill" onclick="selectCategory('Seafood', this)">🦐 Seafood</button>
+          <button class="pill category-pill" onclick="selectCategory('Vegetarian', this)">🥦 Vegetarian</button>
+          <button class="pill category-pill" onclick="selectCategory('Dessert', this)">🍰 Dessert</button>
+          <button class="pill category-pill" onclick="selectCategory('Pasta', this)">🍝 Pasta</button>
+          <button class="pill category-pill" onclick="selectCategory('Breakfast', this)">🍳 Breakfast</button>
+          <button class="pill category-pill" onclick="selectCategory('Lamb', this)">🍖 Lamb</button>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <p class="filter-label">Browse by country</p>
+        <div class="categories country-list">
+          <button class="pill country-pill" onclick="selectCountry('Indian', this)">🇮🇳 Indian</button>
+          <button class="pill country-pill" onclick="selectCountry('American', this)">🇺🇸 American</button>
+          <button class="pill country-pill" onclick="selectCountry('British', this)">🇬🇧 British</button>
+          <button class="pill country-pill" onclick="selectCountry('Canadian', this)">🇨🇦 Canadian</button>
+          <button class="pill country-pill" onclick="selectCountry('Chinese', this)">🇨🇳 Chinese</button>
+          <button class="pill country-pill" onclick="selectCountry('French', this)">🇫🇷 French</button>
+          <button class="pill country-pill" onclick="selectCountry('Italian', this)">🇮🇹 Italian</button>
+          <button class="pill country-pill" onclick="selectCountry('Mexican', this)">🇲🇽 Mexican</button>
+          <button class="pill country-pill" onclick="selectCountry('Thai', this)">🇹🇭 Thai</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-arrow" onclick="document.getElementById('resultsSection').scrollIntoView({behavior:'smooth'})">
+      <span>Explore</span>
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════ RESULTS ══════════════════ -->
+  <section class="results-section" id="resultsSection">
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('all', this)">All Recipes</button>
+      <button class="tab-btn" onclick="switchTab('favourites', this)">❤️ Favourites</button>
+    </div>
+
+    <div class="results-header">
+      <h2 id="sectionTitle">Popular <span>Recipes</span></h2>
+      <div class="results-controls">
+        <span class="result-count" id="resultCount"></span>
+        <button class="ctrl-btn" id="sortBtn" onclick="handleSort()">↑ Sort A–Z</button>
+      </div>
+    </div>
+
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <span>Finding recipes for you…</span>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty" id="emptyState">
+      <div class="big">🍽️</div>
+      <p>No recipes found.</p>
+      <small>Try a different search term or category.</small>
+    </div>
+
+    <!-- RECIPE GRID -->
+    <div class="grid" id="recipeGrid"></div>
+
+  </section>
+
+  <!-- ══════════════════ MODAL ══════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal" id="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-hero">
+        <img id="modalImg" src="" alt=""/>
+        <div class="modal-hero-overlay"></div>
+        <div class="modal-hero-text">
+          <h2 id="modalTitle"></h2>
+          <div class="modal-tag-row" id="modalTags"></div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="section-label">Ingredients</div>
+        <div class="ingredient-chips" id="modalIngredients"></div>
+        <div class="divider"></div>
+        <div class="section-label">Instructions</div>
+        <p class="instructions-text" id="modalInstructions"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/script.js"></script>
+</body>
+</html>
